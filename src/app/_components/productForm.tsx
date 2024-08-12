@@ -18,18 +18,23 @@ export const ProductForm = () => {
         <label htmlFor="title">Title:</label>
         <input
           type="text"
+          placeholder="add your product name"
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="input input-bordered w-full max-w-xs"
         />
       </div>
       <div>
-        <label htmlFor="category">Category:</label>
         <select
           id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          className="select select-bordered w-full max-w-xs"
         >
+          <option disabled selected>
+            Choose a category
+          </option>
           <option value="shirts">Shirts</option>
           <option value="pants">Pants</option>
           <option value="dress">Dress</option>
