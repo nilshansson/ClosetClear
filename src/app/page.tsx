@@ -1,6 +1,11 @@
 import { SignedOut, SignedIn } from "@clerk/nextjs";
+import { ProductForm } from "./_components/productForm";
+import { ProductCard } from "./_components/productCard";
+import { getProducts } from "./server/db/queries";
+import { AddProductButton } from "./_components/addProductButton";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const products = await getProducts();
   return (
     <main className="">
       <SignedOut>
@@ -10,6 +15,13 @@ export default function HomePage() {
       </SignedOut>
       <SignedIn>
         <h1>you are signed in!</h1>
+
+        <AddProductButton />
+        {products.map((product) => {
+          return (
+            <ProductCard title={product.title} category={product.category} />
+          );
+        })}
       </SignedIn>
     </main>
   );

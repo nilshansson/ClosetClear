@@ -8,7 +8,7 @@ import {
 
 export const createTable = pgTableCreator((name) => `closetclear_${name}`);
 
-export const product = createTable("product", {
+export const productTable = createTable("product", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 256 }).notNull(),
   url: varchar("url", { length: 1024 }).notNull(),

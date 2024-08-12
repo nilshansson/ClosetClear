@@ -1,4 +1,6 @@
+"use client";
 import React, { useState } from "react";
+import { UploadButton } from "../utils/uploadthing";
 
 export const ProductForm = () => {
   const [title, setTitle] = useState("");
@@ -21,7 +23,6 @@ export const ProductForm = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
-
       <div>
         <label htmlFor="category">Category:</label>
         <select
@@ -34,7 +35,16 @@ export const ProductForm = () => {
           <option value="dress">Dress</option>
         </select>
       </div>
-
+      <UploadButton
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          alert("Upload Completed");
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />{" "}
       <button type="submit">Save</button>
     </form>
   );

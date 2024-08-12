@@ -12,7 +12,6 @@ export function TopNav() {
           <SignInButton />
         </SignedOut>
         <SignedIn>
-          <UploadButton endpoint="imageUploader" />
           <UserButton />
         </SignedIn>
       </div>
