@@ -20,12 +20,6 @@ export const ourFileRouter = {
       return { userId: user.userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      await db.insert(product).values({
-        name: file.name,
-        url: file.url,
-        userId: metadata.userId,
-      });
-
       return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;
