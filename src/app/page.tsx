@@ -3,6 +3,7 @@ import { ProductForm } from "./_components/productForm";
 import { ProductCard } from "./_components/productCard";
 import { getProducts } from "./server/db/queries";
 import { AddProductButton } from "./_components/addProductButton";
+import { Modal } from "./_components/modal";
 
 export default async function HomePage() {
   const products = await getProducts();
@@ -16,7 +17,7 @@ export default async function HomePage() {
       <SignedIn>
         <h1>you are signed in!</h1>
 
-        <AddProductButton />
+        <Modal />
         {products.map((product) => {
           return (
             <ProductCard title={product.title} category={product.category} />

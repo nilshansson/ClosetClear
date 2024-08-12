@@ -45,7 +45,9 @@ export const ProductForm = () => {
           alert(`ERROR! ${error.message}`);
         }}
       />{" "}
-      <button type="submit">Save</button>
+      <button className="btn btn-outline" type="submit">
+        save
+      </button>
     </form>
   );
 };
