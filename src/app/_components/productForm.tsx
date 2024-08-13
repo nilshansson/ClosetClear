@@ -2,11 +2,14 @@
 import React, { useState } from "react";
 import { UploadButton } from "../utils/uploadthing";
 import { addProductToDB } from "../server/db/queries";
-
+import { SimpleUploadButton } from "./imageuploadbutton";
 export const ProductForm = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("shirts");
   const [newImage, setNewImage] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevents the form from reloading the page
@@ -22,8 +25,9 @@ export const ProductForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 bg-white ">
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 bg-white">
       <h2 className="text-2xl font-bold mb-4 text-center">Add New Product</h2>
+
       <div className="mb-4">
         <label
           htmlFor="title"
@@ -63,21 +67,42 @@ export const ProductForm = () => {
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Upload Image:
         </label>
+        {isUploading && (
+          <span className="loading loading-spinner loading-md"></span>
+        )}
+        {uploadError && (
+          <div className="alert alert-error mb-4">
+            <span>{uploadError}</span>
+          </div>
+        )}
+        {uploadSuccess && (
+          <div className="alert alert-success">
+            <span>image uploaded successfully.</span>
+          </div>
+        )}
         <UploadButton
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
-            alert("Upload Completed");
             const [{ url }] = res;
             setNewImage(url);
+            setIsUploading(false);
+            setUploadError("");
+            setUploadSuccess(true);
+          }}
+          onUploadBegin={() => {
+            setIsUploading(true);
+            setUploadError("");
           }}
           onUploadError={(error: Error) => {
-            alert(`ERROR! ${error.message}`);
+            setIsUploading(false);
+            setUploadError(`ERROR! ${error.message}`);
           }}
         />
       </div>
       <button
         type="submit"
         className="btn btn-outline border-black w-full py-2 px-4 bg-white text-black rounded-md hover:bg-gray-200"
+        disabled={isUploading}
       >
         Save
       </button>

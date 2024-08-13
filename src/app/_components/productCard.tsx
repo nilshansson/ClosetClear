@@ -12,7 +12,7 @@ export function ProductCard({ title, category, url, counteddays }) {
     setCount((prevCount) => Math.max(0, prevCount - 1));
   };
   return (
-    <div className="card bg-gray-50 w-96 shadow-xl flex flex-col">
+    <div className="card bg-gray-50 w-96 shadow-xl flex">
       <figure>
         <img src={url} width={500} height={500} alt="Picture of the product" />
       </figure>
