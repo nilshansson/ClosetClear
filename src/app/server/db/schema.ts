@@ -18,6 +18,6 @@ export const productTable = createTable("product", {
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  usedAmount: integer("usedamount"),
-  countedDays: integer("counteddays"),
+  usedAmount: integer("usedamount").default(0).notNull(),
+  countedDays: integer("counteddays").default(0).notNull(),
 });

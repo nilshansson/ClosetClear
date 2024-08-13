@@ -6,7 +6,7 @@ export function Modal() {
   return (
     <>
       <button
-        className="btn"
+        className="btn btn-outline border-black py-4 px-8 bg-white text-black text-xl text-center rounded-md hover:bg-gray-200"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         Add a new product
@@ -21,8 +21,6 @@ export function Modal() {
           >
             ✕
           </button>
-
-          <h3 className="font-bold text-lg">Hello!</h3>
         </div>
       </dialog>
     </>
