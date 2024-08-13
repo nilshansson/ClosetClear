@@ -88,6 +88,9 @@ export const ProductForm = () => {
             setIsUploading(false);
             setUploadError("");
             setUploadSuccess(true);
+            setTimeout(() => {
+              setUploadSuccess(false);
+            }, 5000);
           }}
           onUploadBegin={() => {
             setIsUploading(true);

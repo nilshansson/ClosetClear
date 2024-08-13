@@ -2,6 +2,7 @@ import { SignedOut, SignedIn } from "@clerk/nextjs";
 import { ProductCard } from "./_components/productCard";
 import { getProducts } from "./server/db/queries";
 import { Modal } from "./_components/modal";
+import { Hero } from "./_components/hero";
 
 export default async function HomePage() {
   const products = await getProducts();
@@ -9,7 +10,7 @@ export default async function HomePage() {
     <main className="">
       <SignedOut>
         <div className="h-full w-full text-center text-2xl">
-          Please sign in above
+          <Hero />
         </div>
       </SignedOut>
       <SignedIn>
