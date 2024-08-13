@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
+  integer,
   pgTableCreator,
   serial,
   timestamp,
@@ -17,6 +18,6 @@ export const productTable = createTable("product", {
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  updatedAt: timestamp("updatedAt"),
-  expiringAt: timestamp("expiringAt"),
+  usedAmount: integer("usedamount"),
+  countedDays: integer("counteddays"),
 });

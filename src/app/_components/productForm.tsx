@@ -1,15 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { UploadButton } from "../utils/uploadthing";
+import { addProductToDB } from "../server/db/queries";
 
 export const ProductForm = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("shirts");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Title:", title);
-    console.log("Category:", category);
+  const handleSubmit = async (e: React.FormEvent) => {
+    await addProductToDB({ title, category });
+    setTitle("");
+    setCategory("shirts");
+    console.log({ title, category });
   };
 
   return (
