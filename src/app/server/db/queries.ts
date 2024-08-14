@@ -10,7 +10,7 @@ export async function getProducts() {
   return products;
 }
 
-export async function addProductToDB(product: ProductType) {
+export async function addProductToDB(product) {
   try {
     const newItem = await db
       .insert(productTable)
@@ -52,4 +52,38 @@ export async function getCountedDays(productId: number) {
 
 export async function deleteProductInDB(productId: number) {
   await db.delete(productTable).where(eq(productTable.id, productId));
+}
+
+export async function updatedCountedDaysOnAllProductsInDB() {
+  const nowTimestamp = new Date();
+
+  const products = await db.select().from(productTable);
+
+  for (const product of products) {
+    const daysDifference = calculateDaysInBetween(
+      new Date(product.createdAt),
+      nowTimestamp
+    );
+
+    await db.update(productTable).set({ countedDays: daysDifference });
+  }
+}
+
+// USE THIS FUNCTION FOR PRODUCTION
+
+// function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
+//   const Difference_In_Time = nowTimestamp.getTime() - createdAt.getTime();
+//   const differenceInDays = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+//   return differenceInDays;
+// }
+
+// THIS FUNCTION IS A MOCK FUNCTION FOR PRESENTATION
+function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
+  const thirtyseconds = 30 * 1000;
+
+  const Difference_In_Time = nowTimestamp.getTime() - createdAt.getTime();
+
+  const differenceInMockDays = Math.floor(Difference_In_Time / thirtyseconds);
+
+  return differenceInMockDays;
 }

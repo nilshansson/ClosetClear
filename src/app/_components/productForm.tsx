@@ -4,7 +4,6 @@ import "@uploadthing/react/styles.css";
 import React, { useState } from "react";
 import { UploadButton } from "../utils/uploadthing";
 import { addProductToDB } from "../server/db/queries";
-import { SimpleUploadButton } from "./imageuploadbutton";
 export const ProductForm = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("shirts");
@@ -14,7 +13,7 @@ export const ProductForm = () => {
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevents the form from reloading the page
+    e.preventDefault();
 
     try {
       await addProductToDB({ title, category, url: newImage });
@@ -113,6 +112,7 @@ export const ProductForm = () => {
         type="submit"
         className="btn btn-outline border-black w-full py-2 px-4 bg-white text-black rounded-md hover:bg-gray-200"
         disabled={isUploading}
+        onClick={() => document.getElementById("my_modal_3").close()}
       >
         Save
       </button>

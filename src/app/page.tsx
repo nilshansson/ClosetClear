@@ -3,10 +3,15 @@
 import { useState, useEffect } from "react";
 import { SignedOut, SignedIn } from "@clerk/nextjs";
 import { ProductCard } from "./_components/productCard";
-import { deleteProductInDB, getProducts } from "./server/db/queries";
+import {
+  deleteProductInDB,
+  getProducts,
+  updatedCountedDaysOnAllProductsInDB,
+} from "./server/db/queries";
 import { Modal } from "./_components/modal";
 import { Hero } from "./_components/hero";
 import { ProductType } from "./types";
+import { MainPageHero } from "./_components/mainpageHero";
 
 export default function HomePage() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -15,6 +20,7 @@ export default function HomePage() {
     async function fetchProducts() {
       const fetchedProducts: ProductType[] = await getProducts();
       setProducts(fetchedProducts);
+      await updatedCountedDaysOnAllProductsInDB();
     }
     fetchProducts();
   }, []);
@@ -37,10 +43,10 @@ export default function HomePage() {
       </SignedOut>
       <SignedIn>
         <div className="flex justify-center items-center mb-4">
-          <Modal />
+          <MainPageHero />
         </div>
 
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center items-center">
           {products.map((product) => (
             <ProductCard
               key={product.id}

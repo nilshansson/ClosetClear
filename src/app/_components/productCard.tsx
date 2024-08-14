@@ -43,8 +43,8 @@ export function ProductCard({
         />
       </figure>
       <div className="card-body flex-grow flex flex-col justify-between p-4">
-        <h2 className="card-title text-lg font-bold">{title}</h2>
-        <p className="text-gray-600">Category: {category}</p>
+        <h2 className="card-title text-xl font-bold">{title}</h2>
+        {/* <p className="text-gray-600">Category: {category}</p> */}
         <div className="card-actions mt-auto">
           <div className="flex items-center space-x-2">
             <button onClick={handleDecrease} className="btn btn-sm">
