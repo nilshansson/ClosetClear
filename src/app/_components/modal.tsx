@@ -6,7 +6,7 @@ export function Modal() {
   return (
     <div className="flex justify-center items-center">
       <button
-        className=" leading-4 btn btn-outline border-black py-4 px-8 bg-white text-black text-xl  rounded-md my-14 hover:bg-gray-200"
+        className=" leading-4 btn btn-outline border-black py-4 px-8 bg-white text-black text-xl  rounded-md mt-14 hover:bg-gray-200"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         Add a new product

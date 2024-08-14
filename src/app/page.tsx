@@ -34,6 +34,7 @@ export default function HomePage() {
 
     fetchProducts();
   }, [selectedCategory]);
+
   const handleDeleteProduct = async (productId: number) => {
     try {
       await deleteProductInDB(productId);

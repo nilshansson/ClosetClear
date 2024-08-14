@@ -4,6 +4,7 @@ import "@uploadthing/react/styles.css";
 import React, { useState } from "react";
 import { UploadButton } from "../utils/uploadthing";
 import { addProductToDB } from "../server/db/queries";
+
 export const ProductForm = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("shirts");
@@ -12,11 +13,16 @@ export const ProductForm = () => {
   const [uploadError, setUploadError] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
+  const defaultImgUrl =
+    "https://images.unsplash.com/photo-1517502166878-35c93a0072f0?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      await addProductToDB({ title, category, url: newImage });
+      const imageUrlToUse = newImage || defaultImgUrl;
+
+      await addProductToDB({ title, category, url: imageUrlToUse });
       setTitle("");
       setCategory("shirts");
       setNewImage("");
@@ -42,7 +48,7 @@ export const ProductForm = () => {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="input input-bordered w-full p-2 border rounded-md"
+          className="input input-bordered w-full p-2 rounded-md border-black"
         />
       </div>
       <div className="mb-4">
@@ -56,7 +62,7 @@ export const ProductForm = () => {
           id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="select select-bordered w-full p-2 border rounded-md"
+          className="select select-bordered w-full p-2 border rounded-md  border-black  py-2 px-4 bg-white text-black"
         >
           <option disabled>Choose a category</option>
           <option value="Tops">Tops</option>

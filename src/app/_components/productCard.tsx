@@ -67,7 +67,7 @@ export function ProductCard({
           </div>
           <button
             onClick={handleDelete}
-            className="btn btn-outline btn-sm !p-0.5 !py-0.5 bg-red-500 text-white text-center rounded-sm self-end hover:bg-gray-200 mt-0.5 text-xs"
+            className="btn btn-outline btn-sm  !py-0.5 bg-red-500 text-white text-center rounded-lg self-end hover:bg-gray-200 mt-0.5 text-xs"
           >
             Delete
           </button>
