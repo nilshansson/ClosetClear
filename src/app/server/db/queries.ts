@@ -2,41 +2,34 @@
 
 import { db } from ".";
 import { productTable } from "./schema";
-
+import { ProductType } from "@/app/types";
 import { eq } from "drizzle-orm";
-
-type Producttype = {
-  title: string;
-  category: string;
-  url: string;
-  userId: number;
-  createdAt: Date;
-};
 
 export async function getProducts() {
   const products = await db.select().from(productTable).execute();
   return products;
 }
 
-export async function addProductToDB(product) {
+export async function addProductToDB(product: ProductType) {
   try {
     const newItem = await db
       .insert(productTable)
       .values({
         title: product.title,
         category: product.category,
-        url: product.url || "", // Handle the optional fields properly
-        userId: product.userId || 1, // Use a default value or ensure it's passed
-        createdAt: new Date(), // Ensure a timestamp is set
+        url: product.url || "",
+
+        countedDays: 0,
+        usedAmount: 0,
+        createdAt: new Date(),
       })
-      .returning(); // Return the inserted row for confirmation
+      .returning();
     return newItem;
   } catch (error) {
     console.error("Error in addProductToDB:", error);
-    throw error; // Re-throw the error to be caught by the API handler
+    throw error;
   }
 }
-
 export async function updateUsedAmount() {
   const usedAmount = await db.update(productTable);
 }
@@ -50,10 +43,13 @@ export async function getCountedDays(productId: number) {
     .where(eq(productTable.id, productId))
     .execute();
 
-  // Assuming that productId is unique, we should get one result back
   if (result.length > 0) {
     return result[0].countedDays;
   } else {
     throw new Error(`Product with id ${productId} not found`);
   }
+}
+
+export async function deleteProductInDB(productId: number) {
+  await db.delete(productTable).where(eq(productTable.id, productId));
 }
