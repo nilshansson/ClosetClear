@@ -17,3 +17,7 @@ export type ProductCardProps = {
   countedDays: number;
   onDeleteAction: (productId: number) => void | Promise<void>;
 };
+
+export type CategorySelectProps = {
+  onCategoryChange: (category: string) => void;
+};

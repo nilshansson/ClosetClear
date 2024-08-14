@@ -59,14 +59,14 @@ export const ProductForm = () => {
           className="select select-bordered w-full p-2 border rounded-md"
         >
           <option disabled>Choose a category</option>
-          <option value="shirts">Tops</option>
-          <option value="pants">Bottoms</option>
-          <option value="dress">Outwear</option>
-          <option value="dress">Dresses</option>
-          <option value="dress">Activewear</option>
-          <option value="dress">Footwear</option>
-          <option value="dress">Swimwear</option>
-          <option value="dress">Accesories</option>
+          <option value="Tops">Tops</option>
+          <option value="Bottoms">Bottoms</option>
+          <option value="Outwear">Outwear</option>
+          <option value="Dresses">Dresses</option>
+          <option value="Activewear">Activewear</option>
+          <option value="Footwear">Footwear</option>
+          <option value="Swimwear">Swimwear</option>
+          <option value="Accesories">Accesories</option>
         </select>
       </div>
       <div className="mb-4">

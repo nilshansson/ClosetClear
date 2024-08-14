@@ -5,7 +5,6 @@ import { ProductCardProps } from "../types";
 
 export function ProductCard({
   title,
-  category,
   url,
   countedDays,
   productId,
@@ -38,27 +37,37 @@ export function ProductCard({
       <div className="card-body flex-grow flex flex-col justify-between p-4">
         <h2 className="card-title text-xl font-bold">{title}</h2>
 
-        <div className="card-actions mt-auto">
-          <div className="flex items-center space-x-2">
-            <button onClick={handleDecreaseUsedAmount} className="btn btn-sm">
-              -
-            </button>
+        <div className="card-actions mt-auto flex flex-col">
+          <div>
+            <div className="flex flex-row">
+              <p className="text-gray-500 m-1">
+                Has been used <strong className="text-black"> {count} </strong>
+                times
+              </p>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={handleDecreaseUsedAmount}
+                  className="btn btn-xs"
+                >
+                  -
+                </button>
 
-            <button onClick={handleIncreaseUsedAmount} className="btn btn-sm">
-              +
-            </button>
+                <button
+                  onClick={handleIncreaseUsedAmount}
+                  className="btn btn-xs"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <p className="text-gray-500">
+              Since the past{" "}
+              <strong className="text-black"> {countedDays} </strong> days
+            </p>
           </div>
-          <p className="text-gray-500">
-            Has been used <strong className="text-black"> {count} </strong>
-            times
-          </p>
-          <p className="text-gray-500">
-            Since the past{" "}
-            <strong className="text-black"> {countedDays} </strong> days
-          </p>
           <button
             onClick={handleDelete}
-            className="btn btn-outline btn-sm !p-0.5 !py-0.5 bg-red-500 text-white text-center rounded-md hover:bg-gray-200 mt-0.5 text-xs"
+            className="btn btn-outline btn-sm !p-0.5 !py-0.5 bg-red-500 text-white text-center rounded-sm self-end hover:bg-gray-200 mt-0.5 text-xs"
           >
             Delete
           </button>

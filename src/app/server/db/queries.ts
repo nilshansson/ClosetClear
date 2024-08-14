@@ -117,3 +117,13 @@ export async function decreaseUsedAmount(productId: number) {
       .where(eq(productTable.id, productId));
   }
 }
+
+export async function getProductsByCategory(category: string) {
+  const products = await db
+    .select()
+    .from(productTable)
+    .where(eq(productTable.category, category))
+    .execute();
+
+  return products;
+}
