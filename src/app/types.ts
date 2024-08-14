@@ -7,3 +7,13 @@ export type ProductType = {
   usedAmount: number;
   countedDays: number;
 };
+
+export type ProductCardProps = {
+  title: string;
+  category: string;
+  url: string;
+  productId: number;
+  usedAmount: number;
+  countedDays: number;
+  onDeleteAction: (productId: number) => void | Promise<void>;
+};

@@ -87,3 +87,33 @@ function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
 
   return differenceInMockDays;
 }
+
+export async function increaseUsedAmount(productId: number) {
+  const products = await db
+    .select({ usedAmount: productTable.usedAmount })
+    .from(productTable)
+    .where(eq(productTable.id, productId));
+
+  if (products.length > 0) {
+    const product = products[0];
+    await db
+      .update(productTable)
+      .set({ usedAmount: product.usedAmount + 1 })
+      .where(eq(productTable.id, productId));
+  }
+}
+
+export async function decreaseUsedAmount(productId: number) {
+  const products = await db
+    .select({ usedAmount: productTable.usedAmount })
+    .from(productTable)
+    .where(eq(productTable.id, productId));
+
+  if (products.length > 0 && products[0].usedAmount > 0) {
+    const product = products[0];
+    await db
+      .update(productTable)
+      .set({ usedAmount: product.usedAmount - 1 })
+      .where(eq(productTable.id, productId));
+  }
+}
