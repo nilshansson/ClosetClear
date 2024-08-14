@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { SignedOut, SignedIn } from "@clerk/nextjs";
 import { ProductCard } from "./_components/productCard";
@@ -9,7 +8,6 @@ import {
   getProductsByCategory,
   updatedCountedDaysOnAllProductsInDB,
 } from "./server/db/queries";
-
 import { Hero } from "./_components/hero";
 import { ProductType } from "./types";
 import { MainPageHero } from "./_components/mainpageHero";
@@ -35,6 +33,10 @@ export default function HomePage() {
     fetchProducts();
   }, [selectedCategory]);
 
+  const handleAddProduct = (newProduct: ProductType) => {
+    setProducts((prevProducts) => [newProduct, ...prevProducts]);
+  };
+
   const handleDeleteProduct = async (productId: number) => {
     try {
       await deleteProductInDB(productId);
@@ -43,6 +45,7 @@ export default function HomePage() {
       console.error("Failed to delete product:", error);
     }
   };
+
   const handleCategoryChange = async (category: string) => {
     setSelectedCategory(category);
   };
@@ -56,7 +59,10 @@ export default function HomePage() {
       </SignedOut>
       <SignedIn>
         <div className="flex justify-center items-center mb-4">
-          <MainPageHero onCategoryChange={handleCategoryChange} />
+          <MainPageHero
+            onCategoryChange={handleCategoryChange}
+            onAddProduct={handleAddProduct}
+          />
         </div>
 
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center items-center">

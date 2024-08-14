@@ -3,9 +3,9 @@
 import "@uploadthing/react/styles.css";
 import React, { useState } from "react";
 import { UploadButton } from "../utils/uploadthing";
-import { addProductToDB } from "../server/db/queries";
+import { addProductToDB, getProducts } from "../server/db/queries";
 
-export const ProductForm = () => {
+export const ProductForm = ({ onAddProduct }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("shirts");
   const [newImage, setNewImage] = useState("");
@@ -21,8 +21,14 @@ export const ProductForm = () => {
 
     try {
       const imageUrlToUse = newImage || defaultImgUrl;
+      const newProduct = await addProductToDB({
+        title,
+        category,
+        url: imageUrlToUse,
+      });
 
-      await addProductToDB({ title, category, url: imageUrlToUse });
+      onAddProduct(newProduct);
+
       setTitle("");
       setCategory("shirts");
       setNewImage("");
@@ -30,7 +36,6 @@ export const ProductForm = () => {
       console.error("Error in handleSubmit:", error);
     }
   };
-
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 bg-white">
       <h2 className="text-2xl font-bold mb-4 text-center">Add New Product</h2>

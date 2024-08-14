@@ -12,7 +12,7 @@ export async function getProducts() {
 
 export async function addProductToDB(product) {
   try {
-    const newItem = await db
+    const [newProduct] = await db
       .insert(productTable)
       .values({
         title: product.title,
@@ -24,14 +24,11 @@ export async function addProductToDB(product) {
         createdAt: new Date(),
       })
       .returning();
-    return newItem;
+    return newProduct;
   } catch (error) {
     console.error("Error in addProductToDB:", error);
     throw error;
   }
-}
-export async function updateUsedAmount() {
-  const usedAmount = await db.update(productTable);
 }
 
 export async function getCountedDays(productId: number) {

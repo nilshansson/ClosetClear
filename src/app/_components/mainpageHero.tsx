@@ -1,8 +1,11 @@
-import { CategorySelectProps } from "../types";
+import { CategorySelectProps, ProductType } from "../types";
 import CategorySelect from "./categorySelect";
 import { Modal } from "./modal";
 
-export function MainPageHero({ onCategoryChange }: CategorySelectProps) {
+export function MainPageHero({
+  onCategoryChange,
+  onAddProduct,
+}: CategorySelectProps & { onAddProduct: (product: ProductType) => void }) {
   return (
     <div
       className="hero min-h-14 w-full mb-2"
@@ -13,7 +16,7 @@ export function MainPageHero({ onCategoryChange }: CategorySelectProps) {
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div>
-        <Modal />
+        <Modal onAddProduct={onAddProduct} />
         <CategorySelect onCategoryChange={onCategoryChange} />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { TopNav } from "./_components/TopNav";
+import { TopNav } from "./_components/topNav";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Footer } from "./_components/footer";
 
