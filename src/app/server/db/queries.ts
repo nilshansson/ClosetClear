@@ -62,7 +62,10 @@ export async function updatedCountedDaysOnAllProductsInDB() {
       nowTimestamp
     );
 
-    await db.update(productTable).set({ countedDays: daysDifference });
+    await db
+      .update(productTable)
+      .set({ countedDays: daysDifference })
+      .where(eq(productTable.id, product.id));
   }
 }
 
