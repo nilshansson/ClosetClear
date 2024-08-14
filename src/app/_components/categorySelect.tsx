@@ -16,7 +16,9 @@ export default function CategorySelect({
     <>
       <label className="form-control w-full max-w-xs border-black">
         <div className="label">
-          <span className="label-text text-white">view by category</span>
+          <span className="label-text text-white">
+            view products by category
+          </span>
         </div>
         <select
           className="select w-full max-w-xs  border-black  text-black text-xl  rounded-md"
