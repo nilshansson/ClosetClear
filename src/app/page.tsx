@@ -12,7 +12,6 @@ import { PreloggedInHero } from "./_components/preLoggedInHero";
 import { ProductType } from "./types";
 import { MainPageHero } from "./_components/mainpageHero";
 import { NoItemsHero } from "./_components/noItemHero";
-
 export default function HomePage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
