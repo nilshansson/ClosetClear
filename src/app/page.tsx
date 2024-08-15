@@ -38,7 +38,7 @@ export default function HomePage() {
     fetchProducts();
   }, [selectedCategory, userId]);
 
-  const handleAddProduct = (newProduct: ProductType) => {
+  const handleAddProductAction = (newProduct: ProductType) => {
     setProducts((prevProducts) => [newProduct, ...prevProducts]);
     setNoItemsDisplay(false);
   };
@@ -67,7 +67,7 @@ export default function HomePage() {
         <div className="flex justify-center items-center mb-4 w-full">
           <MainPageHero
             onCategoryChange={handleCategoryChange}
-            onAddProduct={handleAddProduct}
+            onAddProductAction={handleAddProductAction}
           />
         </div>
 

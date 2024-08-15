@@ -5,8 +5,9 @@ import React, { useState } from "react";
 import { UploadButton } from "../utils/uploadthing";
 import { addProductToDB, getProducts } from "../server/db/queries";
 import { useUser } from "@clerk/nextjs";
+import { OnAddProductProps } from "../types";
 
-export const ProductForm = ({ onAddProduct }) => {
+export const ProductForm = ({ onAddProductAction }: OnAddProductProps) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [newImage, setNewImage] = useState("");
@@ -35,7 +36,7 @@ export const ProductForm = ({ onAddProduct }) => {
         userId as string
       );
 
-      onAddProduct(newProduct);
+      onAddProductAction(newProduct);
 
       setTitle("");
       setCategory("");

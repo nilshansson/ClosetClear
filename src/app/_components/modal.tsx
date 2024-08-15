@@ -1,8 +1,9 @@
 "use client";
 
+import { OnAddProductProps } from "../types";
 import { ProductForm } from "./productForm";
 
-export function Modal({ onAddProduct }) {
+export function Modal({ onAddProductAction }: OnAddProductProps) {
   const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
   return (
     <div className="flex justify-center items-center">
@@ -14,7 +15,7 @@ export function Modal({ onAddProduct }) {
       </button>
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
-          <ProductForm onAddProduct={onAddProduct} />
+          <ProductForm onAddProductAction={onAddProductAction} />
 
           <button
             className="btn btn-lg btn-circle btn-ghost absolute right-2 top-2"

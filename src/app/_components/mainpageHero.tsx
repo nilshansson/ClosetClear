@@ -4,8 +4,10 @@ import { Modal } from "./modal";
 
 export function MainPageHero({
   onCategoryChange,
-  onAddProduct,
-}: CategorySelectProps & { onAddProduct: (product: ProductType) => void }) {
+  onAddProductAction,
+}: CategorySelectProps & {
+  onAddProductAction: (product: ProductType) => void;
+}) {
   return (
     <div
       className="hero min-h-14 w-full mb-2"
@@ -16,7 +18,7 @@ export function MainPageHero({
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div>
-        <Modal onAddProduct={onAddProduct} />
+        <Modal onAddProductAction={onAddProductAction} />
         <CategorySelect onCategoryChange={onCategoryChange} />
       </div>
     </div>
