@@ -86,7 +86,7 @@ export const ProductForm = ({ onAddProductAction }: OnAddProductProps) => {
           <option value="Activewear">Activewear</option>
           <option value="Footwear">Footwear</option>
           <option value="Swimwear">Swimwear</option>
-          <option value="Accesories">Accesories</option>
+          <option value="Accesories">Accessories</option>
         </select>
       </div>
       <div className="mb-4">
@@ -101,7 +101,7 @@ export const ProductForm = ({ onAddProductAction }: OnAddProductProps) => {
         )}
         {uploadSuccess && (
           <div className="alert alert-success bg-green-500 my-2 text-white">
-            <span>image uploaded successfully! 🥳</span>
+            <span>Image uploaded successfully! 🥳</span>
           </div>
         )}
         <UploadButton
