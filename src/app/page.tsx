@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { SignedOut, SignedIn } from "@clerk/nextjs";
+import { SignedOut, SignedIn, useUser } from "@clerk/nextjs";
 import { ProductCard } from "./_components/productCard";
 import {
   deleteProductInDB,
@@ -15,13 +15,16 @@ import { MainPageHero } from "./_components/mainpageHero";
 export default function HomePage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const { user } = useUser();
+  const userId = user?.id;
 
   useEffect(() => {
     async function fetchProducts() {
       let fetchedProducts: ProductType[];
+      if (!userId) return;
 
       if (selectedCategory === "All") {
-        fetchedProducts = await getProducts();
+        fetchedProducts = await getProducts(userId);
       } else {
         fetchedProducts = await getProductsByCategory(selectedCategory);
       }
@@ -31,7 +34,7 @@ export default function HomePage() {
     }
 
     fetchProducts();
-  }, [selectedCategory]);
+  }, [selectedCategory, userId]);
 
   const handleAddProduct = (newProduct: ProductType) => {
     setProducts((prevProducts) => [newProduct, ...prevProducts]);

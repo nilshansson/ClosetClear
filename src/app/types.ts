@@ -21,3 +21,7 @@ export type ProductCardProps = {
 export type CategorySelectProps = {
   onCategoryChange: (category: string) => void;
 };
+
+export type OnAddProductProps = {
+  onAddProduct: (newProduct: ProductType) => void;
+};

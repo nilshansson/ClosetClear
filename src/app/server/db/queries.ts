@@ -5,12 +5,17 @@ import { productTable } from "./schema";
 import { ProductType } from "@/app/types";
 import { eq } from "drizzle-orm";
 
-export async function getProducts() {
-  const products = await db.select().from(productTable).execute();
+export async function getProducts(userId: string) {
+  const products = await db
+    .select()
+    .from(productTable)
+    .where(eq(productTable.userId, userId))
+    .execute();
+
   return products;
 }
 
-export async function addProductToDB(product) {
+export async function addProductToDB(product, userId: string) {
   try {
     const [newProduct] = await db
       .insert(productTable)
@@ -18,7 +23,7 @@ export async function addProductToDB(product) {
         title: product.title,
         category: product.category,
         url: product.url || "",
-
+        userId: userId,
         countedDays: 0,
         usedAmount: 0,
         createdAt: new Date(),
@@ -71,22 +76,22 @@ export async function updatedCountedDaysOnAllProductsInDB() {
 
 // USE THIS FUNCTION FOR PRODUCTION
 
-// function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
-//   const Difference_In_Time = nowTimestamp.getTime() - createdAt.getTime();
-//   const differenceInDays = Math.round(Difference_In_Time / (1000 * 3600 * 24));
-//   return differenceInDays;
-// }
+function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
+  const Difference_In_Time = nowTimestamp.getTime() - createdAt.getTime();
+  const differenceInDays = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+  return differenceInDays;
+}
 
 // THIS FUNCTION IS A MOCK FUNCTION FOR PRESENTATION
-function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
-  const thirtyseconds = 30 * 1000;
+// function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
+//   const thirtyseconds = 30 * 1000;
 
-  const Difference_In_Time = nowTimestamp.getTime() - createdAt.getTime();
+//   const Difference_In_Time = nowTimestamp.getTime() - createdAt.getTime();
 
-  const differenceInMockDays = Math.floor(Difference_In_Time / thirtyseconds);
+//   const differenceInMockDays = Math.floor(Difference_In_Time / thirtyseconds);
 
-  return differenceInMockDays;
-}
+//   return differenceInMockDays;
+// }
 
 export async function increaseUsedAmount(productId: number) {
   const products = await db

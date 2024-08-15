@@ -4,33 +4,41 @@ import "@uploadthing/react/styles.css";
 import React, { useState } from "react";
 import { UploadButton } from "../utils/uploadthing";
 import { addProductToDB, getProducts } from "../server/db/queries";
+import { useUser } from "@clerk/nextjs";
 
 export const ProductForm = ({ onAddProduct }) => {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("shirts");
+  const [category, setCategory] = useState("");
   const [newImage, setNewImage] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
+  const { user } = useUser();
+  const userId = user?.id;
+
   const defaultImgUrl =
     "https://images.unsplash.com/photo-1517502166878-35c93a0072f0?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
+  const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       const imageUrlToUse = newImage || defaultImgUrl;
-      const newProduct = await addProductToDB({
-        title,
-        category,
-        url: imageUrlToUse,
-      });
+      const newProduct = await addProductToDB(
+        {
+          title,
+          category,
+          url: imageUrlToUse,
+        },
+        userId as string
+      );
 
       onAddProduct(newProduct);
 
       setTitle("");
-      setCategory("shirts");
+      setCategory("");
       setNewImage("");
     } catch (error) {
       console.error("Error in handleSubmit:", error);
@@ -123,7 +131,7 @@ export const ProductForm = ({ onAddProduct }) => {
         type="submit"
         className="btn btn-outline border-black w-full py-2 px-4 bg-white text-black rounded-md hover:bg-gray-200"
         disabled={isUploading}
-        onClick={() => document.getElementById("my_modal_3").close()}
+        onClick={() => modal.close()}
       >
         Save
       </button>

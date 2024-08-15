@@ -19,4 +19,5 @@ export const productTable = createTable("product", {
     .notNull(),
   usedAmount: integer("usedamount").default(0).notNull(),
   countedDays: integer("counteddays").default(0).notNull(),
+  userId: varchar("user_id", { length: 255 }).notNull(),
 });
