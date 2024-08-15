@@ -7,7 +7,7 @@ export default function CategorySelect({
 }: CategorySelectProps) {
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const handleChange = async (event) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const category = event.target.value;
     setSelectedCategory(category);
     onCategoryChange(category);

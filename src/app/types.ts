@@ -25,3 +25,9 @@ export type CategorySelectProps = {
 export interface OnAddProductProps {
   onAddProductAction: (newProduct: ProductType) => void;
 }
+
+export type ProductFormType = {
+  title: string;
+  category: string;
+  url: string;
+};

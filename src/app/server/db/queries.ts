@@ -2,7 +2,7 @@
 
 import { db } from ".";
 import { productTable } from "./schema";
-import { ProductType } from "@/app/types";
+import { ProductFormType, ProductType } from "@/app/types";
 import { eq } from "drizzle-orm";
 
 export async function getProducts(userId: string) {
@@ -15,7 +15,7 @@ export async function getProducts(userId: string) {
   return products;
 }
 
-export async function addProductToDB(product, userId: string) {
+export async function addProductToDB(product: ProductFormType, userId: string) {
   try {
     const [newProduct] = await db
       .insert(productTable)
