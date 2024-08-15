@@ -8,7 +8,7 @@ import {
   getProductsByCategory,
   updatedCountedDaysOnAllProductsInDB,
 } from "./server/db/queries";
-import { PreloggedInHero } from "./_components/PreLoggedInHero";
+import { PreloggedInHero } from "./_components/preLoggedInHero";
 import { ProductType } from "./types";
 import { MainPageHero } from "./_components/mainpageHero";
 import { NoItemsHero } from "./_components/noItemHero";
