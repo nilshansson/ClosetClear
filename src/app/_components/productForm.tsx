@@ -93,17 +93,15 @@ export const ProductForm = ({ onAddProductAction }: OnAddProductProps) => {
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Upload Image:
         </label>
-        {isUploading && (
-          <span className="loading loading-spinner loading-md"></span>
-        )}
+
         {uploadError && (
           <div className="alert alert-error mb-4">
             <span>{uploadError}</span>
           </div>
         )}
         {uploadSuccess && (
-          <div className="alert alert-success">
-            <span>image uploaded successfully.</span>
+          <div className="alert alert-success bg-green-500 my-2 text-white">
+            <span>image uploaded successfully! 🥳</span>
           </div>
         )}
         <UploadButton

@@ -8,7 +8,7 @@ import {
   getProductsByCategory,
   updatedCountedDaysOnAllProductsInDB,
 } from "./server/db/queries";
-import { Hero } from "./_components/hero";
+import { PreloggedInHero } from "./_components/PreLoggedInHero";
 import { ProductType } from "./types";
 import { MainPageHero } from "./_components/mainpageHero";
 import { NoItemsHero } from "./_components/noItemHero";
@@ -60,7 +60,7 @@ export default function HomePage() {
     <main className="flex flex-col justify-center w-full">
       <SignedOut>
         <div className="h-full w-full text-center text-2xl">
-          <Hero />
+          <PreloggedInHero />
         </div>
       </SignedOut>
       <SignedIn>

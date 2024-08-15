@@ -1,4 +1,4 @@
-export function Hero() {
+export function PreloggedInHero() {
   return (
     <div
       className="hero min-h-screen"
