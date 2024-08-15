@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getProductsByCategory } from "../server/db/queries";
+
 import { CategorySelectProps } from "../types";
 
 export default function CategorySelect({
