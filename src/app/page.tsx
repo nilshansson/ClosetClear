@@ -11,10 +11,12 @@ import {
 import { Hero } from "./_components/hero";
 import { ProductType } from "./types";
 import { MainPageHero } from "./_components/mainpageHero";
+import { NoItemsHero } from "./_components/noItemHero";
 
 export default function HomePage() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [noItemsDisplay, setNoItemsDisplay] = useState(false);
   const { user } = useUser();
   const userId = user?.id;
 
@@ -28,8 +30,8 @@ export default function HomePage() {
       } else {
         fetchedProducts = await getProductsByCategory(selectedCategory);
       }
-
       setProducts(fetchedProducts);
+      setNoItemsDisplay(fetchedProducts.length === 0);
       await updatedCountedDaysOnAllProductsInDB();
     }
 
@@ -38,6 +40,7 @@ export default function HomePage() {
 
   const handleAddProduct = (newProduct: ProductType) => {
     setProducts((prevProducts) => [newProduct, ...prevProducts]);
+    setNoItemsDisplay(false);
   };
 
   const handleDeleteProduct = async (productId: number) => {
@@ -54,34 +57,38 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex flex-col justify-center">
+    <main className="flex flex-col justify-center w-full">
       <SignedOut>
         <div className="h-full w-full text-center text-2xl">
           <Hero />
         </div>
       </SignedOut>
       <SignedIn>
-        <div className="flex justify-center items-center mb-4">
+        <div className="flex justify-center items-center mb-4 w-full">
           <MainPageHero
             onCategoryChange={handleCategoryChange}
             onAddProduct={handleAddProduct}
           />
         </div>
 
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center items-center">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              productId={product.id}
-              title={product.title}
-              category={product.category}
-              url={product.url}
-              countedDays={product.countedDays}
-              usedAmount={product.usedAmount}
-              onDeleteAction={handleDeleteProduct}
-            />
-          ))}
-        </div>
+        {noItemsDisplay ? (
+          <NoItemsHero />
+        ) : (
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center items-center w-full">
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                productId={product.id}
+                title={product.title}
+                category={product.category}
+                url={product.url}
+                countedDays={product.countedDays}
+                usedAmount={product.usedAmount}
+                onDeleteAction={handleDeleteProduct}
+              />
+            ))}
+          </div>
+        )}
       </SignedIn>
     </main>
   );
