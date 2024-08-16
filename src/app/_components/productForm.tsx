@@ -86,7 +86,7 @@ export const ProductForm = ({ onAddProductAction }: OnAddProductProps) => {
           <option value="Activewear">Activewear</option>
           <option value="Footwear">Footwear</option>
           <option value="Swimwear">Swimwear</option>
-          <option value="Accesories">Accessories</option>
+          <option value="Accessories">Accessories</option>
         </select>
       </div>
       <div className="mb-4">
