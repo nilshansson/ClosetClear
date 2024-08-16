@@ -33,7 +33,7 @@ export default function CategorySelect({
           <option value="Activewear">Activewear</option>
           <option value="Footwear">Footwear</option>
           <option value="Swimwear">Swimwear</option>
-          <option value="Accesories">Accesories</option>
+          <option value="Accessories">Accessories</option>
         </select>
       </label>
       ;
