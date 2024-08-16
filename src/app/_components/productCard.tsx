@@ -26,7 +26,7 @@ export function ProductCard({
     setCount((prevCount) => Math.max(0, prevCount - 1));
   };
   return (
-    <div className="card bg-gray-50 shadow-xl flex flex-col w-96 h-auto">
+    <div className="card bg-gray-50 shadow-xl flex flex-col w-96 h-auto rounded-none">
       <figure className="flex-grow">
         <img
           src={url}
