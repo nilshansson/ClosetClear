@@ -78,7 +78,7 @@ export async function updatedCountedDaysOnAllProductsInDB() {
 
 function calculateDaysInBetween(createdAt: Date, nowTimestamp: Date): number {
   const Difference_In_Time = nowTimestamp.getTime() - createdAt.getTime();
-  const differenceInDays = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+  const differenceInDays = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
   return differenceInDays;
 }
 

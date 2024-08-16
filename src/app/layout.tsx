@@ -9,7 +9,7 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ClosetClear",
-  description: "an App created during Hack Week at SALT, by Nils Hansson Meng",
+  description: "Clear Your Closet - Save The Planet",
 };
 
 export default function RootLayout({
